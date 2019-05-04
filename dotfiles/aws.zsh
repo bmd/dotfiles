@@ -47,11 +47,16 @@ aws::beanstalk::session::start() {
     aws ssm start-session --profile=${profile} --target ${instance}
 }
 
+# Get the total size of images in an ECR Repository. Surprisingly, the
+# UI doesn't give a good way of doing this.
+#
+# Usage:
+#   aws::ecr::repo::size repository [profile]
 aws::ecr::repo::size() {
     local repository profile size
 
-    if [[ -z $1 ]]; then
-        echo "Usage: $0 repository [profile]"
+    if [[ -z "$1" ]]; then
+        echo "Usage: aws::ecr::repo::size repository [profile]"
         return
     fi
 

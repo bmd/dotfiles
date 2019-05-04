@@ -1,5 +1,5 @@
 #!/bin/zsh
-# paths.zsh
+# paths.zsh - A well-organized location for $PATH additions
 
 path_components=(
     /usr/local/bin
