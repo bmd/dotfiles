@@ -3,7 +3,6 @@ export DOTFILES=$HOME/git/dotfiles
 
 export GOSS_PATH=/usr/local/bin/goss
 
-
 DEFAULT_USER=`whoami`
 
 source ~/.tesseract/.tessrc

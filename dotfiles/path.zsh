@@ -1,3 +1,6 @@
+#!/bin/zsh
+# paths.zsh
+
 path_components=(
     /usr/local/bin
     /usr/local/sbin
