@@ -1,14 +1,19 @@
 #!/bin/zsh
-# aws.zsh
-# AWS helper functions for things I use frequently
+# aws.zsh - AWS helper functions for things I use frequently
 
+# Look up an ACM certificate without needing to write the full
+# ARN as the AWS CLI makes you do.
+#
+# Usage:
+#   aws::acm::lookup account certificate [region] [profile]
 aws::acm::lookup() {
+    local account certificate region profile
+
     if [[ -n $1 ]] || [[ -n $2 ]]; then
-        echo "Usage: $0 account certificate [region] [profile]"
+        echo "USAGE: aws::acm::lookup account certificate [region] [profile]"
         return
     fi
 
-    local account certificate region profile
     account="$1"
     certificate="$2"
     [[ -n $3 ]] && region="$3" || region="us-east-1"

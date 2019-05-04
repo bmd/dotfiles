@@ -13,9 +13,6 @@ mcd() { mkdir -p "$1" && cd "$1"; }
 j64() { echo $@ | base64 --decode | jq . ; }
 yq() { yaml2json | jq $@ ; }
 clone() { cd ~/git && git clone git@github.com:$1 && cd $(basename "$1"); }
-
-
-
 check_url() { curl::loop $1; }
 
 op::keys::restore() {
@@ -36,6 +33,5 @@ restore_ssh_keys() {
 }
 
 err() { echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2; }
-
 tesseract_cert() { aws::acm::lookup 093597997342 $1 "us-east-1" "bsd-tesseract" | jq . ; }
 tesseract_session() { beanstalk::session ; }
