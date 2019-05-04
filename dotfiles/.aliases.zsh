@@ -10,30 +10,18 @@ alias reload="source ~/.zshrc"
 source $HOME/.aws.zsh
 source $HOME/.helpers.zsh
 
-mcd() { mkdir -p "$1" && cd "$1"; }
-j64() { echo $@ | base64 --decode | jq . ; }
-yq() { yaml2json | jq $@ ; }
+# Utilities
 clone() { cd ~/git && git clone git@github.com:$1 && cd $(basename "$1"); }
-check_url() { curl::loop $1; }
-
-op::keys::restore() {
-    local outdir tag documents
-    outdir="$1"
-    [[ -n $2 ]] && tag="$2" || tag="ssh-keys"
-}
-
-restore_ssh_keys() {
-  DOCUMENTS=$(op list documents --vault="Blue State Digital" | jq -r '.[] | select(.overview.tags[] | contains("ssh-keys")).uuid,.overview.title' | xargs -L2 echo)
-  OUTDIR="$1"
-  while read -r line; do
-    fileKey=$(echo $line | cut -f1 -d ' ')
-    fileName=$(echo $line | cut -f2 -d ' ')
-    echo "Writing $fileKey to $fileName"
-    op get document ${fileKey} > "$OUTDIR/${fileName}"
-  done <<< "$DOCUMENTS"
-}
-
 err() { echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2; }
-tesseract_cert() { aws::acm::lookup 093597997342 $1 "us-east-1" "bsd-tesseract" | jq . ; }
-tesseract_session() { beanstalk::session ; }
+j64() { echo $@ | base64 --decode | jq . ; }
+mcd() { mkdir -p "$1" && cd "$1"; }
 monitor_url() { curl::loop $@ ; }
+yq() { yaml2json | jq $@ ; }
+
+# SSH Keys helpers
+backup_ssh_keys() { op::keys::backup $HOME/.ssh "Blue State Digital" "ssh-keys"; }
+restore_ssh_keys() { op::keys::restore $HOME/.ssh "Blue State Digital" "ssh-keys" ; }
+
+# Tesseract helpers
+tesseract_cert() { aws::acm::lookup 093597997342 $1 us-east-1 bsd-tesseract | jq . ; }
+tesseract_session() { aws::beanstalk::session $1 ; }
