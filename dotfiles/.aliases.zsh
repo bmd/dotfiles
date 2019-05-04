@@ -1,13 +1,14 @@
 #!/bin/zsh
-# aliases.zsh
+# .aliases.zsh
 
 # Simple command aliases
 alias bt='ssh bastion-tools'
 alias mkdir="mkdir -p"
+alias reload="source ~/.zshrc"
 
 # Include my shell libraries
-source aws.zsh
-source helpers.zsh
+source $HOME/.aws.zsh
+source $HOME/.helpers.zsh
 
 mcd() { mkdir -p "$1" && cd "$1"; }
 j64() { echo $@ | base64 --decode | jq . ; }
@@ -35,3 +36,4 @@ restore_ssh_keys() {
 err() { echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2; }
 tesseract_cert() { aws::acm::lookup 093597997342 $1 "us-east-1" "bsd-tesseract" | jq . ; }
 tesseract_session() { beanstalk::session ; }
+monitor_url() { curl::loop $@ ; }

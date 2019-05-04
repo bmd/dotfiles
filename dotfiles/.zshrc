@@ -38,5 +38,5 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Source shell aliases
-[[ -e $HOME/.aliases ]] && source $HOME/.aliases
+source $HOME/.aliases.zsh
 [[ -e $HOME/.tesseract/.tessrc ]] && source $HOME/.tesseract/.tessrc

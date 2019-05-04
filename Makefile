@@ -8,7 +8,7 @@ bootstrap: ## Bootstrap on a fresh machine
 	#./bootstrap.sh
 
 % :: dotfiles/%
-	ln -sfv $(shell pwd)/dotfiles/$< $(HOME)
+	ln -sfv $(shell pwd)/$< $(HOME)
 
 symlinks: .zshrc .aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh
 
