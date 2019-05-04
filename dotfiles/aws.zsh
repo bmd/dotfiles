@@ -9,8 +9,8 @@
 aws::acm::lookup() {
     local account certificate region profile
 
-    if [[ -n $1 ]] || [[ -n $2 ]]; then
-        echo "USAGE: aws::acm::lookup account certificate [region] [profile]"
+    if [[ -z $1 ]] || [[ -z $2 ]]; then
+        echo "Usage: aws::acm::lookup account certificate [region] [profile]"
         return
     fi
 
