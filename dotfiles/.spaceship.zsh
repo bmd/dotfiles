@@ -1,4 +1,16 @@
 # Spaceship prompt settings
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  exec_time     # Execution time
+  line_sep      # Line break
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
 SPACESHIP_PROMPT_SEPARATE_LINE=false
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 
@@ -37,8 +49,3 @@ SPACESHIP_GIT_STATUS_UNMERGED=""
 SPACESHIP_GIT_STATUS_AHEAD=""
 SPACESHIP_GIT_STATUS_BEHIND=""
 SPACESHIP_GIT_STATUS_DIVERGED=""
-
-SPACESHIP_PHP_SHOW=false
-SPACESHIP_NODE_SHOW=false
-SPACESHIP_PACKAGE_SHOW=false
-SPACESHIP_KUBECONTEXT_SHOW=false
