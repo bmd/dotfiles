@@ -6,6 +6,8 @@ path_components=(
     /usr/local/sbin
     $HOME/golang/bin
     $HOME/.composer/vendor/bin
+    $GOPATH/bin
+    $GOROOT/bin
     $PATH
 )
 

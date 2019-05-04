@@ -7,8 +7,10 @@ bootstrap: ## Bootstrap on a fresh machine
 	#chmod +x bootstrap.sh
 	#./bootstrap.sh
 
-symlinks: ## Create symlinks
-	echo 'make symlinks'
+% :: dotfiles/%
+	ln -sfv $(shell pwd)/dotfiles/$< $(HOME)
+
+symlinks: .zshrc .aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh
 
 help: ## Show this help dialog
 	@echo "\n  Commands:\n"

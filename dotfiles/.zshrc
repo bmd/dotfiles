@@ -8,26 +8,22 @@ export GOROOT="$(brew --prefix golang)/libexec"
 
 export GOSS_PATH="/usr/local/bin/goss"
 
+# Default to Python3 for new virtual environments
 export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
+
+# Base URL for ZSH JIRA extension
+export JIRA_URL="https://bluestatedigital.atlassian.net"
+
+source $HOME/.path.zsh
 
 # Load autocompletes
 fpath=(~/.zsh/completion $fpath)
 
-# autoload -Uz compinit && compinit -i
-# autoload -U +X bashcompinit && bashcompinit
-# source ~/.zsh/completion/_tesseract
-
-# Go Development
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-test -d "${GOPATH}" || mkdir "${GOPATH}"
-test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
-
-# Set name of the theme to load.
-#ZSH_THEME="bmd/bmd"
+# Configure my Spaceship prompt
 ZSH_THEME="spaceship"
 source $HOME/.spaceship.zsh
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Enable ZSH plugins
 plugins=(
     aws
     brew
@@ -41,6 +37,6 @@ plugins=(
 # Now load the ZSH shell
 source $ZSH/oh-my-zsh.sh
 
-# Aliases
+# Source shell aliases
 [[ -e $HOME/.aliases ]] && source $HOME/.aliases
 [[ -e $HOME/.tesseract/.tessrc ]] && source $HOME/.tesseract/.tessrc
