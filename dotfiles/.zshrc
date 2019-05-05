@@ -6,7 +6,7 @@ export LESS=-R
 # It's like vi but better!
 export EDITOR='nano'
 
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 export GOPATH="${HOME}/go"
 export GOROOT="$(brew --prefix golang)/libexec"
@@ -22,7 +22,7 @@ export JIRA_URL="https://bluestatedigital.atlassian.net"
 source $HOME/.path.zsh
 
 # Load autocompletes
-fpath=(~/.zsh/completion $fpath)
+fpath=($HOME/.zsh/completion $fpath)
 
 # Configure my Spaceship prompt
 ZSH_THEME="spaceship"

@@ -52,9 +52,32 @@ op::keys::backup() {
     vault="$2"
     tag="$3"
 
+    existing_documents=$(
+        op list documents --vault="${vault}" | \
+        jq "[ .[] | select(.overview.tags[] | contains(\"${tag}\")) ]"
+    )
+
     for file in $1/*(.); do
+        # 1) Get the basename of the file
         base=$(basename $file);
         echo "==> Backing up ${base} to ${vault}"
-        op create document ${file} --title=${base} --vault=${vault} --tags=${tag} | jq -r .uuid
+
+        # 2) Find if there is an existing file with the same name and save its ID
+        existing_uuid=$(echo ${existing_documents} | jq -r ".[] | select(.overview.title == \"${base}\").uuid")
+        if [[ -n $existing_uuid ]]; then
+            echo "    There is a previous version of this file with UUID \"${existing_uuid}\""
+        else
+            echo "    This is a new file!"
+        fi
+        # 3) Upload the new file and confirm that a new UID was issued
+        new_uuid=$(op create document ${file} --title=${base} --vault=${vault} --tags=${tag} | jq -r .uuid)
+
+        echo "    Successfully uploaded ${base} - the new UUID is \"${new_uuid}\""
+
+        # 4) Delete the file by UID we saved in (2)
+        if [[ -n $existing_uuid ]]; then
+            op delete item ${existing_uuid} --vault="${vault}"
+            echo "    Deleted old version"
+        fi
     done
 }
