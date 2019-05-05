@@ -10,11 +10,46 @@ alias reload="source ~/.zshrc"
 source $HOME/.aws.zsh
 source $HOME/.helpers.zsh
 
+# ----------------------------------------
 # Utilities
-clone() { cd ~/git && git clone git@github.com:$1 && cd $(basename "$1"); }
-err() { echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2; }
-j64() { echo $@ | base64 --decode | jq . ; }
-mcd() { mkdir -p "$1" && cd "$1"; }
+# ----------------------------------------
+
+# Clone a github repository and then go into the directory created.
+#
+# Usage:
+#   clone repository
+# Example:
+#   clone bmd/dotfiles
+clone() {
+    cd ~/git && git clone git@github.com:$1 && cd $(basename "$1")
+}
+
+# Print a timestamp and message to stdout
+#
+# Usage:
+#   err message
+# Example:
+#   error "Your function call is bad and you should feel bad"
+err() {
+    echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+# Pretty-print a base64-encoded JSON object.
+#
+# Usage:
+#   j64 data
+j64() {
+    echo $@ | base64 --decode | jq .
+}
+
+# Create a new directory and change into it
+#
+# Usage:
+#   mcd foo/bar/baz
+mcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
 monitor_url() { curl::loop $@ ; }
 yq() { yaml2json | jq $@ ; }
 
