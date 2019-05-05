@@ -80,7 +80,18 @@ monitor_url() {
     curl::loop $@
 }
 
-# Backup my SSH keys to a 1Password vault using the op CLI tool.
+# Sign in to 1Password CLI and set the resulting session token as an
+# environment variable.
+#
+# Usage
+#   ops
+ops() {
+    eval $(op signin my)
+}
+
+# Backup my SSH keys to a 1Password vault using the op CLI tool. You
+# need to run `ops` to log in to your 1Password account locally before
+# this will work.
 #
 # Usage:
 #   backup_ssh_keys
@@ -88,7 +99,9 @@ backup_ssh_keys() {
     op::keys::backup $HOME/.ssh "Blue State Digital" "ssh-keys"
 }
 
-# Restore my backed-up SSH keys from a 1Password vault
+# Restore my backed-up SSH keys from a 1Password vault You
+# need to run `ops` to log in to your 1Password account locally before
+# this will work.
 #
 # Usage:
 #   restore_ssh_keys
@@ -96,8 +109,14 @@ restore_ssh_keys() {
     op::keys::restore $HOME/.ssh "Blue State Digital" "ssh-keys"
 }
 
-# Tesseract helpers
-tesseract_cert() { aws::acm::lookup 093597997342 $1 us-east-1 bsd-tesseract | jq . ; }
+# Look up an individual ACM certificate by ID in Tesseract and pretty-print
+# the result with jq.
+#
+# Usage:
+#   tesseract_cert id
+tesseract_cert() {
+    aws::acm::lookup 093597997342 $1 us-east-1 bsd-tesseract | jq .
+}
 
 # We need to bridge the way we identify environments in tesseract (e.g. "auth-int") with
 # how our Beanstalk environments are named.

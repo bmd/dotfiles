@@ -41,7 +41,20 @@ op::keys::restore() {
     done <<< "${documents}"
 }
 
+# Backup all of the files in a folder using the 1Password CLI and tag them with
+# a shared tag.
+#
+# Usage:
+#   op::keys::backup indir vault tag
 op::keys::backup() {
-    local indir vault tag
-    # @TODO
+    local indir vault tag base
+    indir="$1"
+    vault="$2"
+    tag="$3"
+
+    for file in $1/*(.); do
+        base=$(basename $file);
+        echo "==> Backing up ${base} to ${vault}"
+        op create document ${file} --title=${base} --vault=${vault} --tags=${tag} | jq -r .uuid
+    done
 }

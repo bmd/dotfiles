@@ -3,7 +3,9 @@ export ZSH=$HOME/.oh-my-zsh
 # This makes it possible to scroll through man pages in iTerm2 with the trackpad in OSX 10.13+
 export LESS=-R
 
+# It's like vi but better!
 export EDITOR='nano'
+
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 export GOPATH="${HOME}/go"
