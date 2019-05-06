@@ -1,6 +1,7 @@
 # Taps
 tap "caskroom/fonts"
 tap "homebrew/bundle"
+tap "homebrew/cask-drivers"
 tap "homebrew/core"
 
 # Recipes
@@ -23,6 +24,7 @@ cask "postman"
 cask "pycharm"
 cask "sequel-pro"
 cask "slack"
+cask "sonos"
 cask "spectacle"
 cask "sublime-text"
 cask "vanilla"
