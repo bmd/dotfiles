@@ -1,0 +1,41 @@
+[filter "lfs"]
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+
+[user]
+    name = Brendan Downing
+    email = b.maionedowning@gmail.com
+    editor = nano
+    signingkey = F5DA2DE20536E861
+
+[core]
+    excludesfile = /Users/bmd/.gitignore_global
+    editor = nano
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+    pager = true
+
+[alias]
+    ss = status -u -s
+    co = checkout
+    cm = commit
+    new = checkout -b
+    l = log --graph --pretty=format:'%C(yellow)%h %C(magenta)%G?%C(auto)%d%Creset %s %C(blue)- %an, %C(bold black)%ar%Creset'
+    laa = log --graph --pretty=format:'%C(yellow)%h %C(magenta)%G?%C(auto)%d%Creset %s %C(blue)- %an, %C(bold black)%ar%Creset' --all
+    la = log --pretty=oneline --abbrev-commit --graph --decorate --all
+    ll = log --oneline --stat --graph
+    d = diff --color-words
+    dw = diff --word-diff
+    dc = diff --cached
+    dd = diff --word-diff --word-diff-regex=.
+    who = shortlog -sn --
+
+[commit]
+    ; gpgsign = true
