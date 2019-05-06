@@ -3,9 +3,11 @@ default: help
 install: bootstrap symlinks
 
 bootstrap: ## Bootstrap on a fresh machine
-	echo 'make bootstrap'
-	#chmod +x bootstrap.sh
-	#./bootstrap.sh
+	echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	brew bundle install -v
+	$(MAKE) symlinks
 
 % :: dotfiles/%
 	ln -sfv $(shell pwd)/$< $(HOME)
