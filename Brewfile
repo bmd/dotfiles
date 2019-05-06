@@ -4,28 +4,34 @@ tap "homebrew/bundle"
 tap "homebrew/cask-drivers"
 tap "homebrew/core"
 
-# Recipes
-brew "awscli", link: true
+# Common dependencies
 brew "jq"
 brew "python", link: true
 brew "sqlite"
 
-# Apps
+# Development Tools
+brew "awscli", link: true
+cask "docker"
+cask "github"
+cask "iterm2"
+cask "postman"
+cask "sequel-pro"
+
+# Editors/IDEs
+cask "font-fira-code"
+cask "goland"
+cask "phpstorm"
+cask "pycharm"
+cask "sublime-text"
+cask "visual-studio-code"
+
+# Productivity
 cask "1Password"
 cask "1Password-cli"
-cask "docker"
-cask "font-fira-code"
-cask "github"
-cask "goland"
-cask "iterm2"
 cask "karabiner-elements"
-cask "phpstorm"
-cask "postman"
-cask "pycharm"
-cask "sequel-pro"
 cask "slack"
-cask "sonos"
 cask "spectacle"
-cask "sublime-text"
 cask "vanilla"
-cask "visual-studio-code"
+
+# Misc
+cask "sonos"
