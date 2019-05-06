@@ -39,8 +39,13 @@ aws::beanstalk::session::start() {
     fi
 
     environment="$1"
-    [[ -n $2 ]] && profile="$2" || profile="default"
-    instance=$(aws elasticbeanstalk describe-environment-resources --profile=${profile} --environment-name=${environment} | jq -r ".EnvironmentResources.Instances[].Id" | sort -R | head -n 1)
+    profile=$(aws::profile::resolve $2)
+    instance=$(
+        aws elasticbeanstalk describe-environment-resources --profile=${profile} --environment-name=${environment} | \
+        jq -r ".EnvironmentResources.Instances[].Id" | \
+        sort -R | \
+        head -n 1
+    )
 
     aws ssm start-session --profile=${profile} --target ${instance}
 }
@@ -59,7 +64,15 @@ aws::ecr::repo::size() {
 
     repository="$1"
     profile=$(aws::profile::resolve $2)
-    size=$(aws ecr describe-images --profile=${profile} --repository-name ${repository} | jq '.imageDetails | map(.imageSizeInBytes) | add | ((. // 0) / (1024 * 1024)) | floor')
+    size=$(
+        aws ecr describe-images --profile=${profile} --repository-name ${repository} | \
+        jq ".imageDetails
+            | map(.imageSizeInBytes)
+            | add
+            | ((. // 0) / (1024 * 1024))
+            | floor
+        "
+    )
 
     echo "${repository}: ${size}mb"
 }

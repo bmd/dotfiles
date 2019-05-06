@@ -4,7 +4,7 @@
 # Use the 1Password CLI to restore SSH Keys from a 1password vault. Keys will
 # be written to $outdir with 600 permissions. Any document tagged with $tag
 # are assumed to be SSH keys, so make sure that the $tag value is only used
-# for this purpose. Existing keys will be overwritten, so don't fuck it up.
+# for this purpose. Existing files will be overwritten, so don't fuck it up.
 #
 # Usage:
 #   op::keys::restore outdir vault tag
