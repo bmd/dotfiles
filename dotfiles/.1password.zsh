@@ -9,23 +9,29 @@
 # Usage:
 #   op::keys::restore outdir vault tag
 op::keys::restore() {
-    local outdir vault tag documents
+    local outdir vault tag documents uuid filename
     outdir="$1"
     vault="$2"
     tag="$3"
     documents=$(
         op list documents --vault="${vault}" | \
-        jq -r '.[] | select(.overview.tags[] | contains("${tag}")).uuid,.overview.title' | \
-        xargs -L2 echo
+        jq -r ".[]
+            | select(.trashed == \"N\")
+            | select(
+                .overview.tags[] | contains(\"${tag}\")
+              )
+            | [.uuid,.overview.title]
+            | @tsv
+        "
     )
 
-    while read -r line; do
-        fkey=$(echo $line | cut -f1 -d ' ')
-        fname=$(echo $line | cut -f2 -d ' ')
-        echo "Writing $fkey to $fname"
-        op get document ${fkey} > ${outdir}/${fname}
-        chmod 600 ${outdir}/${fname}
-    done <<< "${documents}"
+    while IFS=$'\t' read -A line; do
+        uuid="${line[1]}"
+        filename="${line[2]}"
+        echo "Restoring ${outdir}/${filename}"
+        op get document --vault="${vault}" ${uuid} > ${outdir}/${filename}
+        chmod 600 ${outdir}/${filename}
+    done <<< ${documents}
 }
 
 # Backup all of the files in a folder using the 1Password CLI and tag them with
@@ -52,7 +58,11 @@ op::keys::backup() {
 
     existing_documents=$(
         op list documents --vault="${vault}" | \
-        jq "[ .[] | select(.overview.tags[] | contains(\"${tag}\")) ]"
+        jq "[
+            .[]
+            | select(.overview.tags[]
+            | contains(\"${tag}\"))
+        ]"
     )
 
     for file in $1/*(.); do
@@ -61,7 +71,9 @@ op::keys::backup() {
 
         existing_uuid=$(
             echo ${existing_documents} | \
-            jq -r ".[] | select(.overview.title == \"${base}\").uuid"
+            jq -r ".[]
+                | select(.overview.title == \"${base}\").uuid
+            "
         )
 
         if [[ -n ${existing_uuid} ]]; then
