@@ -10,7 +10,7 @@ bootstrap: ## Bootstrap on a fresh machine
 % :: dotfiles/%
 	ln -sfv $(shell pwd)/$< $(HOME)
 
-symlinks: .zshrc .aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh .1password.zsh
+symlinks: .gitignore_global .editorconfig .zshrc .aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh .1password.zsh
 
 help: ## Show this help dialog
 	@echo "\n  Commands:\n"
