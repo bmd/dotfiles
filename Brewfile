@@ -1,6 +1,29 @@
 # Taps
-tap 'homebrew/bundle'
+tap "caskroom/fonts"
+tap "homebrew/bundle"
+tap "homebrew/core"
 
-# Binaries
-brew 'zsh'
-brew 'zsh-completions'
+# Recipes
+brew "awscli"
+brew "jq"
+brew "python"
+brew "sqlite"
+
+# Apps
+cask "1Password"
+cask "1Password-cli"
+cask "docker"
+cask "font-fira-code"
+cask "github"
+cask "goland"
+cask "iterm2"
+cask "karabiner-elements"
+cask "phpstorm"
+cask "postman"
+cask "pycharm"
+cask "sequel-pro"
+cask "slack"
+cask "spectacle"
+cask "sublime-text"
+cask "vanilla"
+cask "visual-studio-code"
