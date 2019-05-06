@@ -5,9 +5,9 @@ tap "homebrew/cask-drivers"
 tap "homebrew/core"
 
 # Recipes
-brew "awscli"
+brew "awscli", link: true
 brew "jq"
-brew "python"
+brew "python", link: true
 brew "sqlite"
 
 # Apps
