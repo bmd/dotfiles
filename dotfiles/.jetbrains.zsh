@@ -21,6 +21,32 @@ jetbrains::plugin::exists() {
     [[ $code == "404" ]] && echo "" || echo "ok"
 }
 
+# Uninstall a jetbrains plugin by name. Good to use in conjunction with
+# the jetbrains::plugin::list function in this package.
+#
+# Usage:
+#   jetbrains::plugin::uninstall <editor> <name>
+jetbrains::plugin::uninstall() {
+    local editor plugin_name
+    editor="$1"
+    plugin_name="$2"
+
+    if [[ -z $editor ]] || [[ -z $plugin_name ]]; then
+        echo "Usage: jetbrains::plugin::uninstall <editor> <plugin-id>"
+        return 1
+    fi
+
+    plugins_dir=$(ls -1d ${JETBRAINS_PLUGIN_DIR}/${editor}* | sort | tail -n1)
+    rm -rf "${plugins_dir}/${plugin_name}"
+}
+
+jetbrains::plugins::list() {
+    local editor
+    editor="$1"
+    plugins_dir=$(ls -1d ${JETBRAINS_PLUGIN_DIR}/${editor}* | sort | tail -n1)
+    ls -1 ${plugins_dir}
+}
+
 # Install a jetbrains plugin for a specific editor by its unique ID. This isn't
 # the most efficient, but there doesn't seem to be an easily-accessible map of
 # these unique IDs to plugin names.
@@ -57,7 +83,8 @@ jetbrains::plugin::install() {
     latest_version=$(curl -s ${JETBRAINS_PLUGIN_API}/api/plugins/${plugin_id}/updates | jq -r '.[0].file')
     echo "Downloading ${latest_version}..."
     curl -L -s -o "/tmp/${editor}_plugin_${plugin_id}.zip" "${JETBRAINS_PLUGIN_API}/files/${latest_version}"
-
+    # Alternate?
+    # /plugin/download/?id=${plugin_id}
     echo "Installing plugin"
     unzip -o "/tmp/${editor}_plugin_${plugin_id}.zip" -d ${plugins_dir}
     rm -f "/tmp/${editor}_plugin_${plugin_id}.zip"
