@@ -16,6 +16,7 @@ alias reload="source ~/.zshrc"
 source $HOME/.aws.zsh
 source $HOME/.helpers.zsh
 source $HOME/.1password.zsh
+source $HOME/.jetbrains.zsh
 
 # ----------------------------------------
 # Utilities
