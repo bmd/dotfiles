@@ -6,8 +6,9 @@ tap "homebrew/core"
 
 # Common dependencies
 brew "jq"
-brew "python", link: true
 brew "sqlite"
+brew "python", link: true
+brew "node"
 
 # Development Tools
 brew "awscli", link: true

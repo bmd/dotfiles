@@ -46,7 +46,7 @@ module.exports = {
     backgroundColor: '#000',
 
     // terminal selection color
-    selectionColor: 'rgba(255,255,255,0.2)',
+    selectionColor: 'rgba(255,255,255,0.5)',
 
     // border color (window, tabs)
     borderColor: '#161716',
@@ -138,7 +138,10 @@ module.exports = {
     webGLRenderer: true,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
-},
+    hyperBorder: {
+      borderWidth: `3px`
+    }
+  },
 
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
@@ -147,7 +150,9 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
+    "hyper-hide-scroll",
     'hyper-chesterish',
+    'hyperborder',
   ],
 
   // in development, you can create a directory under
