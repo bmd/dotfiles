@@ -14,7 +14,7 @@ bootstrap: ## Bootstrap on a fresh machine
 
 symlinks: .gitconfig .gitignore_global .editorconfig .zshrc \
 	.aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh \
-	.1password.zsh .jetbrains.zsh
+	.1password.zsh .jetbrains.zsh .hyper.js
 
 help: ## Show this help dialog
 	@echo "\n  Commands:\n"

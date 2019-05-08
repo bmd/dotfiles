@@ -13,7 +13,7 @@ brew "sqlite"
 brew "awscli", link: true
 cask "docker"
 cask "github"
-cask "iterm2"
+cask "hyper"
 cask "postman"
 cask "sequel-pro"
 
