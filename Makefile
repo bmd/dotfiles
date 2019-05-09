@@ -3,10 +3,14 @@ default: help
 install: bootstrap symlinks
 
 bootstrap: ## Bootstrap on a fresh machine
+	# Install homebrew and deps
 	echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 	brew bundle install -v
+
+	# Install oh-my-zsh
+	curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+
+	# Symlink dotfiles
 	$(MAKE) symlinks
 
 % :: dotfiles/%
@@ -15,6 +19,10 @@ bootstrap: ## Bootstrap on a fresh machine
 symlinks: .gitconfig .gitignore_global .editorconfig .zshrc \
 	.aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh \
 	.1password.zsh .jetbrains.zsh .hyper.js
+
+update:
+	git pull
+	$(MAKE) symlinks
 
 help: ## Show this help dialog
 	@echo "\n  Commands:\n"

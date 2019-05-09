@@ -1,20 +1,8 @@
-# Dotfiles
+# BMDotfiles
 These are my dotfiles. There are many like them, but these ones are mine.
 
-## Installing on a fresh machine
+## Installing
 
-Run
-
-```bash
-make install
-```
-
-This will run the bootstrap script as well as installing the symlinks
-
-## Refreshing symlinks
-
-Just run
-
-```bash
-make symlinks
-```
+Run <kbd>make install</kbd> which will bootstrap homebrew and Oh-my-zsh! as well as setting up
+symlinks for all of the files in `./dotfiles` to `~`. Subsequently, you can just run <kbd>make
+update</kbd> to pull the latest version of the files and refresh the symlinks.
