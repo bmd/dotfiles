@@ -8,6 +8,7 @@
 alias bt='ssh bastion-tools'
 alias mkdir="mkdir -p"
 alias reload="source ~/.zshrc"
+alias vsco="code ."
 
 # ----------------------------------------
 # Libraries
