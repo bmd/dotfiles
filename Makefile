@@ -1,17 +1,16 @@
 default: help
 
-install: bootstrap symlinks
+install: bootstrap bundle symlinks
+
+bundle:
+	brew bundle install -v
 
 bootstrap: ## Bootstrap on a fresh machine
 	# Install homebrew and deps
 	echo | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	brew bundle install -v
 
 	# Install oh-my-zsh
 	curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-
-	# Symlink dotfiles
-	$(MAKE) symlinks
 
 % :: dotfiles/%
 	ln -sfv $(shell pwd)/$< $(HOME)

@@ -3,6 +3,7 @@ SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
   user          # Username section
   dir           # Current directory section
+  venv          # Virtual environment information
   host          # Hostname section
   git           # Git section (git_branch + git_status)
   exec_time     # Execution time
@@ -17,6 +18,11 @@ SPACESHIP_CHAR_SYMBOL="%F{071}❯"
 SPACESHIP_CHAR_PREFIX=""
 SPACESHIP_CHAR_SUFFIX=" "
 
+SPACESHIP_VENV_PREFIX="%F{blue}("
+SPACESHIP_VENV_SUFFIX="%F{blue}) "
+SPACESHIP_VENV_COLOR="250"
+
+SPACESHIP_DIR_PREFIX=""
 SPACESHIP_DIR_COLOR="250"
 SPACESHIP_DIR_TRUNC_REPO=false
 SPACESHIP_DIR_TRUNC=0
