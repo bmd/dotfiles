@@ -7,7 +7,7 @@ module.exports = {
 
     // Text
     fontSize: 14,
-    fontFamily: 'Consolas, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: '"Fira Code", Consolas, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
     fontWeight: 'normal',
     fontWeightBold: 'normal',
     lineHeight: 1,
@@ -53,7 +53,7 @@ module.exports = {
     showWindowControls: '',
 
     // Shell
-    shell: '',
+    shell: '/bin/zsh',
     shellArgs: ['--login'],
     env: {},
     bell: 'SOUND',

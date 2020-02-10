@@ -11,4 +11,5 @@ Thumbs.db
 # IDE Files
 # ----------------------------------------
 .idea/
-.vscode
+.vscode/
+.ipynb_checkpoints/

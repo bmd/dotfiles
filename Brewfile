@@ -12,18 +12,11 @@ brew "sqlite"
 brew "tree"
 
 # Development Tools
-brew "awscli", link: true
-cask "docker"
 cask "github"
 cask "hyper"
-cask "postman"
-cask "sequel-pro"
 
 # Editors/IDEs
 cask "font-fira-code"
-cask "goland"
-cask "phpstorm"
-cask "pycharm"
 cask "sublime-text"
 cask "visual-studio-code"
 
@@ -33,7 +26,10 @@ cask "1Password-cli"
 cask "karabiner-elements"
 cask "slack"
 cask "spectacle"
-cask "vanilla"
+cask "spotify"
+
+# Data Science
+brew "jupyter"
 
 # Misc
 cask "sonos"

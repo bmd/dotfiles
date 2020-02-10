@@ -5,11 +5,12 @@
 # Commands
 # ----------------------------------------
 
-alias bt='ssh bastion-tools'
+alias jp='jupyter notebook'
 alias mkdir="mkdir -p"
 alias reload="source ~/.zshrc"
 alias vsco="code ."
 alias v="source ./venv/bin/activate"
+alias gpm="git push origin master"
 
 # ----------------------------------------
 # Libraries
@@ -23,6 +24,10 @@ source $HOME/.jetbrains.zsh
 # ----------------------------------------
 # Utilities
 # ----------------------------------------
+
+sav2csv() {
+    R --no-save --silent -e "library(foreign); write.csv(read.spss(file='$1'), file='$2')"
+}
 
 # Clone a github repository and then go into the directory created.
 #
@@ -111,15 +116,6 @@ backup_ssh_keys() {
 #   restore_ssh_keys
 restore_ssh_keys() {
     op::keys::restore $HOME/.ssh "Blue State Digital" "ssh-keys"
-}
-
-# Look up an individual ACM certificate by ID in Tesseract and pretty-print
-# the result with jq.
-#
-# Usage:
-#   tesseract_cert id
-tesseract_cert() {
-    aws::acm::lookup 093597997342 $1 us-east-1 bsd-tesseract | jq .
 }
 
 # We need to bridge the way we identify environments in tesseract (e.g. "auth-int") with

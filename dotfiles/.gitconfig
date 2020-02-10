@@ -5,8 +5,8 @@
     clean = git-lfs clean -- %f
 
 [user]
-    name = Brendan Downing
-    email = b.maionedowning@gmail.com
+	name = Brendan Downing
+	email = brendanmdowning@gmail.com
     editor = nano
     signingkey = F5DA2DE20536E861
 
