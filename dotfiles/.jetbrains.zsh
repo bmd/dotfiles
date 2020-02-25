@@ -82,10 +82,17 @@ jetbrains::plugin::install() {
 
     latest_version=$(curl -s ${JETBRAINS_PLUGIN_API}/api/plugins/${plugin_id}/updates | jq -r '.[0].file')
     echo "Downloading ${latest_version}..."
-    curl -L -s -o "/tmp/${editor}_plugin_${plugin_id}.zip" "${JETBRAINS_PLUGIN_API}/files/${latest_version}"
-    # Alternate?
-    # /plugin/download/?id=${plugin_id}
-    echo "Installing plugin"
-    unzip -o "/tmp/${editor}_plugin_${plugin_id}.zip" -d ${plugins_dir}
-    rm -f "/tmp/${editor}_plugin_${plugin_id}.zip"
+
+    if [[ "$latest_version" == *.jar ]]; then
+        echo 'Downloading JAR directly'
+        curl -L -s -o "${plugins_dir}/${latest_version}" "${JETBRAINS_PLUGIN_API}/files/${latest_version}"
+    else
+        echo 'Downloading ZIP file'
+        curl -L -s -o "/tmp/${editor}_plugin_${plugin_id}.zip" "${JETBRAINS_PLUGIN_API}/files/${latest_version}"
+        # Alternate?
+        # /plugin/download/?id=${plugin_id}
+        echo "Installing plugin"
+        unzip -qq -o "/tmp/${editor}_plugin_${plugin_id}.zip" -d ${plugins_dir}
+        rm -f "/tmp/${editor}_plugin_${plugin_id}.zip"
+    fi
 }

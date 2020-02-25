@@ -1,5 +1,5 @@
 #!/bin/zsh
-# aws.zsh - AWS helper functions for things I use frequently
+# .aws.zsh
 
 # Look up an ACM certificate without needing to write the full
 # ARN as the AWS CLI makes you do.

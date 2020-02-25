@@ -56,6 +56,6 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases.zsh
 
 # Load google path completion helpers
-export $GOOGLE_SDK_PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+export GOOGLE_SDK_PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 source $GOOGLE_SDK_PATH/path.zsh.inc
 source $GOOGLE_SDK_PATH/completion.zsh.inc

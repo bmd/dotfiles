@@ -46,7 +46,7 @@ clone() {
 # Example:
 #   err "Your function call is bad and you should feel bad"
 err() {
-    echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+    echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')] [ERROR] $@" >&2
 }
 
 # Pretty-print a base64-encoded JSON object.
@@ -116,26 +116,4 @@ backup_ssh_keys() {
 #   restore_ssh_keys
 restore_ssh_keys() {
     op::keys::restore $HOME/.ssh "Blue State Digital" "ssh-keys"
-}
-
-# We need to bridge the way we identify environments in tesseract (e.g. "auth-int") with
-# how our Beanstalk environments are named.
-#
-# Usage:
-#   tesseract_session environment
-# Example:
-#   tesseract_session auth-int
-tesseract_session() {
-    local name parts beanstalk
-
-    name="$1"
-    parts=("${(@s/-/)name}")
-    beanstalk=$(
-        aws resourcegroupstaggingapi get-resources \
-            --resource-type-filters elasticbeanstalk \
-            --tag-filters Key=service,Values=${parts[1]} Key=environment,Values=${parts[2]} \
-            | jq -r '.ResourceTagMappingList[0].Tags[] | select(.Key == "Name").Value'
-    )
-
-    aws::beanstalk::session::start ${beanstalk}
 }
