@@ -23,6 +23,7 @@ cask "visual-studio-code"
 # Productivity
 cask "1Password"
 cask "1Password-cli"
+cask "gpg-suite"
 cask "karabiner-elements"
 cask "slack"
 cask "spectacle"

@@ -74,6 +74,7 @@ module.exports = {
     "hyper-hide-scroll",
     'hyper-chesterish',
     'hyperborder',
+    //'hyperpower',
   ],
   localPlugins: [],
   keymaps: {},
