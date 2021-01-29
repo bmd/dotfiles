@@ -11,7 +11,7 @@ export EDITOR='nano'
 #export EDITOR='vim'
 
 
-export SSH_KEY_PATH="$HOME/.ssh/cfarinella.poloniex"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 export GOPATH="${HOME}/go"
 export GOROOT="$(brew --prefix golang)/libexec"
