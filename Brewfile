@@ -26,7 +26,7 @@ cask "1Password-cli"
 cask "gpg-suite"
 cask "karabiner-elements"
 cask "slack"
-cask "spectacle"
+cask "rectangle"
 cask "spotify"
 
 # Data Science
