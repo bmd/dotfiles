@@ -34,7 +34,7 @@ cask "keybase"
 #cask "karabiner-elements"
 cask "rectangle"
 cask "signal"
-x#cask "slack"
+cask "slack"
 cask "spotify"
 
 # Data Science
