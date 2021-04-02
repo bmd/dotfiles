@@ -12,8 +12,12 @@ brew "sqlite"
 brew "tree"
 
 # Development Tools
+cask "balenaetcher"
+cask "docker"
 cask "github"
+cask "mcgimp"
 cask "hyper"
+cask "postman"
 
 # Editors/IDEs
 cask "font-fira-code"
@@ -23,9 +27,14 @@ cask "visual-studio-code"
 # Productivity
 cask "1Password"
 cask "1Password-cli"
-cask "karabiner-elements"
+cask "discord"
+cask "gpg-suite"
+cask "keybase"
+
+#cask "karabiner-elements"
+cask "rectangle"
+cask "signal"
 cask "slack"
-cask "spectacle"
 cask "spotify"
 
 # Data Science

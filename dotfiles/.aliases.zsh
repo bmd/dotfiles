@@ -11,6 +11,7 @@ alias reload="source ~/.zshrc"
 alias vsco="code ."
 alias v="source ./venv/bin/activate"
 alias gpm="git push origin master"
+alias genpw='dd if=/dev/urandom bs=18 count=1 2>/dev/null | base64'
 
 # ----------------------------------------
 # Libraries
@@ -24,6 +25,19 @@ source $HOME/.jetbrains.zsh
 # ----------------------------------------
 # Utilities
 # ----------------------------------------
+
+# Create a GitHub PR
+#
+# Make sure to be in a local branch
+# make sure to push the branch to git beforehand
+#
+GITURL="https://github.com"
+pr() {
+  local repo=$(git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/")
+  local branch=$(git name-rev --name-only HEAD)
+  echo "... creating pull request for branch \"${branch}\" in \"${repo}\""
+  open "${GITURL}/${repo}/compare/${branch}?expand=1"
+}
 
 sav2csv() {
     R --no-save --silent -e "library(foreign); write.csv(read.spss(file='$1'), file='$2')"
