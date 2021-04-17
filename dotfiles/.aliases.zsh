@@ -5,12 +5,15 @@
 # Commands
 # ----------------------------------------
 
+alias k='kubectl'
 alias jp='jupyter notebook'
 alias mkdir="mkdir -p"
 alias reload="source ~/.zshrc"
 alias vsco="code ."
 alias v="source ./venv/bin/activate"
 alias gpm="git push origin master"
+alias dcr='docker-compose run'
+alias dcrm='docker-compose run --rm'
 
 # ----------------------------------------
 # Libraries
@@ -20,10 +23,31 @@ source $HOME/.aws.zsh
 source $HOME/.helpers.zsh
 source $HOME/.1password.zsh
 source $HOME/.jetbrains.zsh
+source $HOME/.gcloud.zsh
 
 # ----------------------------------------
 # Utilities
 # ----------------------------------------
+
+kc() {
+    kubectl config use-context $1
+}
+
+tail_tiller() {
+    kubectl --context $1 logs -f --tail=200 -n kube-system deployment/tiller-deploy
+}
+
+delete_sessions_from_file() {
+    local sessions_file=$1
+    jq -R -s -c 'split("\n")[:-1] | { "token": "MINI-ARMAGEDDON", "prefixes": . }' $sessions_file \
+    | curl -X POST http://localhost:5005/delete-specific-sessions -H 'Content-Type: application/json' -d @-
+}
+
+helmvm() {
+    local version=$1
+    ln -sf /usr/local/bin/tiller${version} /usr/local/bin/tiller
+    ln -sf /usr/local/bin/helm${version} /usr/local/bin/helm
+}
 
 sav2csv() {
     R --no-save --silent -e "library(foreign); write.csv(read.spss(file='$1'), file='$2')"

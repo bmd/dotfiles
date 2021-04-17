@@ -5,8 +5,8 @@
     clean = git-lfs clean -- %f
 
 [user]
-	name = Brendan Downing
-	email = brendanmdowning@gmail.com
+    name = Brendan Downing
+    email = brendanmdowning@gmail.com
     editor = nano
     signingkey = F5DA2DE20536E861
 
@@ -36,6 +36,10 @@
     dc = diff --cached
     dd = diff --word-diff --word-diff-regex=.
     who = shortlog -sn --
+    spm = !git stash && git pull origin master --commit && git stash apply
 
 [commit]
     ; gpgsign = true
+
+[pull]
+	rebase = false

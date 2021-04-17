@@ -6,19 +6,16 @@ tap "homebrew/core"
 
 # Common dependencies
 brew "jq"
-brew "node"
+brew "nvm"
 brew "python", link: true
 brew "sqlite"
 brew "tree"
 
 # Development Tools
-cask "github"
-cask "hyper"
-
-# Editors/IDEs
 cask "font-fira-code"
 cask "sublime-text"
 cask "visual-studio-code"
+cask "beekeeper-studio"
 
 # Productivity
 cask "1Password"

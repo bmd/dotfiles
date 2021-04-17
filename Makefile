@@ -17,7 +17,7 @@ bootstrap: ## Bootstrap on a fresh machine
 
 symlinks: .gitconfig .gitignore_global .editorconfig .zshrc \
 	.aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh \
-	.1password.zsh .jetbrains.zsh .hyper.js
+	.1password.zsh .jetbrains.zsh .gcloud.zsh
 
 update:
 	git pull
