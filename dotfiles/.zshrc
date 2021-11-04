@@ -50,3 +50,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Kubectl completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+export PATH="/opt/homebrew/opt/elasticsearch@6/bin:$PATH"

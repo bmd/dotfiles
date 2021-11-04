@@ -1,5 +1,5 @@
 # Taps
-tap "caskroom/fonts"
+tap "homebrew/cask-fonts"
 tap "homebrew/bundle"
 tap "homebrew/cask-drivers"
 tap "homebrew/core"
@@ -8,16 +8,19 @@ tap "homebrew/core"
 brew "jq"
 brew "sqlite"
 brew "tree"
+brew "gpg"
 
 # Languages
-brew "nvm"
+brew "nvm", link: true
 brew "python", link: true
 brew "go"
 
 # Devops
 cask "google-cloud-sdk"
-cask "awscli"
+brew "awscli"
 brew "azure-cli"
+brew "kubectl"
+
 
 # Development Tools
 cask "font-fira-code"
@@ -26,11 +29,12 @@ cask "visual-studio-code"
 cask "beekeeper-studio"
 cask "docker"
 cask "insomnia"
+cask "iterm2"
 
 # Productivity
+cask "google-chrome"
 cask "1Password"
 cask "1Password-cli"
-cask "karabiner-elements"
 cask "slack"
 cask "rectangle"
 
