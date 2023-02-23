@@ -14,10 +14,9 @@ export GOROOT="$(brew --prefix golang)/libexec"
 
 export GOSS_PATH="/usr/local/bin/goss"
 
-# Base URL for ZSH JIRA extension
-export JIRA_URL=""
-
 source $HOME/.path.zsh
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Load autocompletes
 fpath=($HOME/.zsh/completion $fpath)
@@ -33,8 +32,7 @@ plugins=(
     copyfile
     docker
     git
-    jira
-    osx
+    # poetry
 )
 
 # Now load the ZSH shell
@@ -47,7 +45,8 @@ source $HOME/.aliases.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
 
-# Kubectl completion
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-export PATH="/opt/homebrew/opt/elasticsearch@6/bin:$PATH"
+eval "$(rbenv init - zsh)"
+
+source $HOME/.zsh_completion

@@ -37,6 +37,8 @@ cask "1Password"
 cask "1Password-cli"
 cask "slack"
 cask "rectangle"
+cask "zoom"
+brew "ykman"
 
 # Data Science
 brew "jupyterlab"

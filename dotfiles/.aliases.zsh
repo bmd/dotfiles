@@ -5,7 +5,6 @@
 # Commands
 # ----------------------------------------
 
-alias k='kubectl'
 alias jp='jupyter notebook'
 alias mkdir="mkdir -p"
 alias reload="source ~/.zshrc"
@@ -20,38 +19,15 @@ alias dcrm='docker-compose run --rm'
 # ----------------------------------------
 
 source $HOME/.aws.zsh
-source $HOME/.helpers.zsh
-source $HOME/.1password.zsh
-source $HOME/.jetbrains.zsh
 source $HOME/.gcloud.zsh
+source $HOME/.helpers.zsh
+source $HOME/.k8s.zsh
+source $HOME/.logrocket.zsh
+source $HOME/.1password.zsh
 
 # ----------------------------------------
 # Utilities
 # ----------------------------------------
-
-kc() {
-    kubectl config use-context $1
-}
-
-tail_tiller() {
-    kubectl --context $1 logs -f --tail=200 -n kube-system deployment/tiller-deploy
-}
-
-delete_sessions_from_file() {
-    local sessions_file=$1
-    jq -R -s -c 'split("\n")[:-1] | { "token": "MINI-ARMAGEDDON", "prefixes": . }' $sessions_file \
-    | curl -X POST http://localhost:5005/delete-specific-sessions -H 'Content-Type: application/json' -d @-
-}
-
-helmvm() {
-    local version=$1
-    ln -sf /usr/local/bin/tiller${version} /usr/local/bin/tiller
-    ln -sf /usr/local/bin/helm${version} /usr/local/bin/helm
-}
-
-sav2csv() {
-    R --no-save --silent -e "library(foreign); write.csv(read.spss(file='$1'), file='$2')"
-}
 
 # Clone a github repository and then go into the directory created.
 #
@@ -78,7 +54,8 @@ err() {
 # Usage:
 #   j64 data
 j64() {
-    echo $@ | base64 --decode | jq .
+     base64 --decode | jq $@
+#    echo $@ | base64 --decode | jq .
 }
 
 # Use JQ with YAML data by converting the YAML to JSON on the fly.
@@ -120,24 +97,4 @@ monitor_url() {
 #   ops
 ops() {
     eval $(op signin my)
-}
-
-# Backup my SSH keys to a 1Password vault using the op CLI tool. You
-# need to run `ops` to log in to your 1Password account locally before
-# this will work.
-#
-# Usage:
-#   backup_ssh_keys
-backup_ssh_keys() {
-    op::keys::backup $HOME/.ssh "Blue State Digital" "ssh-keys"
-}
-
-# Restore my backed-up SSH keys from a 1Password vault You
-# need to run `ops` to log in to your 1Password account locally before
-# this will work.
-#
-# Usage:
-#   restore_ssh_keys
-restore_ssh_keys() {
-    op::keys::restore $HOME/.ssh "Blue State Digital" "ssh-keys"
 }

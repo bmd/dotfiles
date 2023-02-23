@@ -7,22 +7,32 @@ bundle:
 
 bootstrap: ## Bootstrap on a fresh machine
 	# Install homebrew and deps
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	
+	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 	# Install oh-my-zsh
-	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	sh -c "$$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 	# Install spaceship
 	git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 	ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
-
 % :: dotfiles/%
 	ln -sfv $(shell pwd)/$< $(HOME)
 
-symlinks: .gitconfig .gitignore_global .editorconfig .zshrc \
-	.aliases.zsh .aws.zsh .helpers.zsh .path.zsh .spaceship.zsh \
-	.1password.zsh .jetbrains.zsh .gcloud.zsh
+symlinks: \
+	.1password.zsh \
+	.aliases.zsh \
+	.aws.zsh \
+	.editorconfig \
+	.gcloud.zsh \
+	.gitconfig \
+	.gitignore_global \
+	.helpers.zsh \
+	.k8s.zsh \
+	.logrocket.zsh \
+	.path.zsh \
+	.spaceship.zsh \
+	.zshrc
 
 update:
 	git pull
