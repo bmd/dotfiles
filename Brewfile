@@ -18,9 +18,7 @@ brew "go"
 # Devops
 cask "google-cloud-sdk"
 brew "awscli"
-brew "azure-cli"
 brew "kubectl"
-
 
 # Development Tools
 cask "font-fira-code"
@@ -38,10 +36,6 @@ cask "1Password-cli"
 cask "slack"
 cask "rectangle"
 cask "zoom"
-brew "ykman"
-
-# Data Science
-brew "jupyterlab"
 
 # Misc
 cask "sonos"

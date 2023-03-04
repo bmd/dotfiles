@@ -12,14 +12,12 @@ export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 export GOPATH="${HOME}/go"
 export GOROOT="$(brew --prefix golang)/libexec"
 
-export GOSS_PATH="/usr/local/bin/goss"
-
 source $HOME/.path.zsh
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Load autocompletes
-fpath=($HOME/.zsh/completion $fpath)
+#fpath=($HOME/.zsh/completion $fpath)
 
 # Configure my Spaceship prompt
 ZSH_THEME="spaceship"
@@ -45,8 +43,5 @@ source $HOME/.aliases.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
 
-eval "$(rbenv init - zsh)"
-
-source $HOME/.zsh_completion
+[ -s "$HOME/.zsh_completion" ] && source $HOME/.zsh_completion

@@ -1,3 +1,5 @@
+export ZSH_CUSTOM
+
 default: help
 
 install: bootstrap bundle symlinks
@@ -5,22 +7,28 @@ install: bootstrap bundle symlinks
 bundle:
 	brew bundle install -v
 
-bootstrap: ## Bootstrap on a fresh machine
-	# Install homebrew and deps
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+install-homebrew:
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+	(echo; echo 'eval "$$(/opt/homebrew/bin/brew shellenv)"') >> $(HOME)/.zprofile
+	eval "$$(/opt/homebrew/bin/brew shellenv)"
 
-	# Install oh-my-zsh
-	sh -c "$$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+install-oh-my-zsh:
+	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-	# Install spaceship
-	git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-	ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+install-spaceship:
+	git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$(HOME)/.oh-my-zsh/custom/themes/spaceship-prompt" --depth=1 && \
+		ln -s "$(HOME)/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$(HOME)/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+
+bootstrap: install-homebrew install-spaceship
+
+
+uninstall: remove-symlinks remove-spaceship
+
 
 % :: dotfiles/%
 	ln -sfv $(shell pwd)/$< $(HOME)
 
 symlinks: \
-	.1password.zsh \
 	.aliases.zsh \
 	.aws.zsh \
 	.editorconfig \
@@ -28,11 +36,25 @@ symlinks: \
 	.gitconfig \
 	.gitignore_global \
 	.helpers.zsh \
-	.k8s.zsh \
-	.logrocket.zsh \
 	.path.zsh \
 	.spaceship.zsh \
 	.zshrc
+
+remove-homebrew:
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
+remove-symlinks:
+	rm -f $(HOME)/.aliases.zsh \
+		$(HOME)/.aws.zsh \
+		$(HOME)/.editorconfig \
+		$(HOME)/.gcloud.zsh \
+		$(HOME)/.gitconfig \
+		$(HOME)/.gitignore_global \
+		$(HOME)/.helpers.zsh \
+		$(HOME)/.logrocket.zsh \
+		$(HOME)/.path.zsh \
+		$(HOME)/.spaceship.zsh \
+		$(HOME)/.zshrc
 
 update:
 	git pull

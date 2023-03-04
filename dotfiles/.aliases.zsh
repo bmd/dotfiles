@@ -21,9 +21,6 @@ alias dcrm='docker-compose run --rm'
 source $HOME/.aws.zsh
 source $HOME/.gcloud.zsh
 source $HOME/.helpers.zsh
-source $HOME/.k8s.zsh
-source $HOME/.logrocket.zsh
-source $HOME/.1password.zsh
 
 # ----------------------------------------
 # Utilities
@@ -88,13 +85,4 @@ mcd() {
 #   monitor_url https://google.com 5 "The status code is: %{http_code}"
 monitor_url() {
     curl::loop $@
-}
-
-# Sign in to 1Password CLI and set the resulting session token as an
-# environment variable.
-#
-# Usage
-#   ops
-ops() {
-    eval $(op signin my)
 }

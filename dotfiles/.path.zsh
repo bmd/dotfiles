@@ -6,9 +6,6 @@ path_components=(
     /usr/local/sbin
     /usr/local/opt/mysql-client/bin
     /usr/local/opt/ruby/bin
-    /usr/local/opt/terraform@0.11/bin
-    /usr/local/opt/awscli@1/bin
-    $(gcloud info --format='value(installation.sdk_root)')/bin
     $HOME/golang/bin
     $HOME/.composer/vendor/bin
     $HOME/.local/bin
@@ -20,6 +17,9 @@ path_components=(
 
 # Use a ZSH array expression to join path components with ":"
 export PATH=${(j.:.)path_components}
+
+# Deduplicate and clean up
+typeset -U path
 
 # A useful alias for pretty-printing the path
 alias prettypath='echo $PATH | tr -s ":" "\n" | sort | uniq'
