@@ -10,9 +10,6 @@ alias mkdir="mkdir -p"
 alias reload="source ~/.zshrc"
 alias vsco="code ."
 alias v="source ./venv/bin/activate"
-alias gpm="git push origin master"
-alias dcr='docker-compose run'
-alias dcrm='docker-compose run --rm'
 
 # ----------------------------------------
 # Libraries
